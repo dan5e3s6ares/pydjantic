@@ -37,7 +37,7 @@ def to_django(settings: BaseSettings):
             return {k: _get_actual_value(v) for k, v in val.items()}
         elif isinstance(val, list):
             return [_get_actual_value(item) for item in val]
-        elif isinstance(val, SecretStr) or isinstance(val, SecretBytes):
+        elif isinstance(val, (SecretStr, SecretBytes)):
             return val.get_secret_value()
         else:
             return val
